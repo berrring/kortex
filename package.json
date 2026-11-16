@@ -1,0 +1,12 @@
+{
+  "name": "kortex",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Kortex.ai — современная веб-платформа автоматизации сценариев",
+  "scripts": {
+    "dev": "npm --prefix my-landing run dev",
+    "build": "npm --prefix my-landing run build",
+    "lint": "npm --prefix my-landing run lint",
+    "preview": "npm --prefix my-landing run preview"
+  }
+}
