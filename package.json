@@ -2,9 +2,12 @@
   "name": "kortex",
   "private": true,
   "version": "1.0.0",
-  "description": "Kortex.ai — современная веб-платформа автоматизации сценариев",
+  "description": "Kortex — Personal AI Workspace & MCP Bridge",
   "scripts": {
     "dev": "npm --prefix my-landing run dev",
+    "dev:client": "npm --prefix my-landing run dev",
+    "dev:server": "npm --prefix server run dev",
+    "server": "npm --prefix server start",
     "build": "npm --prefix my-landing run build",
     "lint": "npm --prefix my-landing run lint",
     "preview": "npm --prefix my-landing run preview"

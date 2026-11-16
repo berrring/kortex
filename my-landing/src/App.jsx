@@ -2,32 +2,22 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { AppDataProvider } from './context/AppDataContext';
 
-// Layouts
-import { MarketingLayout } from './layouts/MarketingLayout';
-import { AuthLayout } from './layouts/AuthLayout';
-import { DashboardLayout } from './layouts/DashboardLayout';
+// Layout
+import { WorkspaceLayout } from './layouts/WorkspaceLayout';
 
-// Marketing Pages
-import { HomePage } from './pages/marketing/HomePage';
-import { FeaturesPage } from './pages/marketing/FeaturesPage';
-import { HowItWorksPage } from './pages/marketing/HowItWorksPage';
-import { PricingPage } from './pages/marketing/PricingPage';
-import { FaqPage } from './pages/marketing/FaqPage';
-import { ContactPage } from './pages/marketing/ContactPage';
-
-// Auth Pages
-import { LoginPage } from './pages/auth/LoginPage';
-import { SignupPage } from './pages/auth/SignupPage';
-import { ForgotPasswordPage } from './pages/auth/ForgotPasswordPage';
-
-// Dashboard Pages
-import { OverviewPage } from './pages/dashboard/OverviewPage';
-import { WorkflowsPage } from './pages/dashboard/WorkflowsPage';
-import { WorkflowEditorPage } from './pages/dashboard/WorkflowEditorPage';
-import { TemplatesPage } from './pages/dashboard/TemplatesPage';
-import { IntegrationsPage } from './pages/dashboard/IntegrationsPage';
-import { ActivityPage } from './pages/dashboard/ActivityPage';
-import { SettingsPage } from './pages/dashboard/SettingsPage';
+// Workspace Pages
+import { AssistantPage } from './pages/workspace/AssistantPage';
+import { ChatsPage } from './pages/workspace/ChatsPage';
+import { ProjectsPage } from './pages/workspace/ProjectsPage';
+import { ProjectDetailPage } from './pages/workspace/ProjectDetailPage';
+import { TasksPage } from './pages/workspace/TasksPage';
+import { ConnectionsPage } from './pages/workspace/ConnectionsPage';
+import { MemoryPage } from './pages/workspace/MemoryPage';
+import { ActivityPage } from './pages/workspace/ActivityPage';
+import { SettingsPage } from './pages/workspace/SettingsPage';
+import { WorkflowsPage } from './pages/workspace/WorkflowsPage';
+import { WorkflowEditorPage } from './pages/workspace/WorkflowEditorPage';
+import { TemplatesPage } from './pages/workspace/TemplatesPage';
 
 export default function App() {
   return (
@@ -35,35 +25,44 @@ export default function App() {
       <AppDataProvider>
         <BrowserRouter>
           <Routes>
-            {/* Public Marketing Website */}
-            <Route element={<MarketingLayout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/features" element={<FeaturesPage />} />
-              <Route path="/how-it-works" element={<HowItWorksPage />} />
-              <Route path="/pricing" element={<PricingPage />} />
-              <Route path="/faq" element={<FaqPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-            </Route>
+            {/* Personal AI Workspace Layout */}
+            <Route path="/" element={<WorkspaceLayout />}>
+              {/* Primary AI Assistant Screen */}
+              <Route index element={<AssistantPage />} />
+              <Route path="assistant" element={<Navigate to="/" replace />} />
 
-            {/* Authentication Interfaces */}
-            <Route element={<AuthLayout />}>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            </Route>
+              {/* Core Personal Productivity & Context */}
+              <Route path="chats" element={<ChatsPage />} />
+              <Route path="projects" element={<ProjectsPage />} />
+              <Route path="projects/:id" element={<ProjectDetailPage />} />
+              <Route path="tasks" element={<TasksPage />} />
 
-            {/* Application Dashboard */}
-            <Route path="/app" element={<DashboardLayout />}>
-              <Route index element={<OverviewPage />} />
+              {/* MCP Bridge & App Integrations */}
+              <Route path="connections" element={<ConnectionsPage />} />
+
+              {/* Personal Memory & History */}
+              <Route path="memory" element={<MemoryPage />} />
+              <Route path="activity" element={<ActivityPage />} />
+
+              {/* Settings */}
+              <Route path="settings" element={<SettingsPage />} />
+
+              {/* Advanced Workflows Automation */}
               <Route path="workflows" element={<WorkflowsPage />} />
               <Route path="workflows/:id" element={<WorkflowEditorPage />} />
-              <Route path="templates" element={<TemplatesPage />} />
-              <Route path="integrations" element={<IntegrationsPage />} />
-              <Route path="activity" element={<ActivityPage />} />
-              <Route path="settings" element={<SettingsPage />} />
+              <Route path="workflows/templates" element={<TemplatesPage />} />
+
+              {/* Legacy dashboard redirects for seamless continuity */}
+              <Route path="app" element={<Navigate to="/" replace />} />
+              <Route path="app/workflows" element={<Navigate to="/workflows" replace />} />
+              <Route path="app/workflows/:id" element={<WorkflowEditorPage />} />
+              <Route path="app/templates" element={<Navigate to="/workflows/templates" replace />} />
+              <Route path="app/integrations" element={<Navigate to="/connections" replace />} />
+              <Route path="app/activity" element={<Navigate to="/activity" replace />} />
+              <Route path="app/settings" element={<Navigate to="/settings" replace />} />
             </Route>
 
-            {/* Fallback route */}
+            {/* Fallback to primary screen */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
